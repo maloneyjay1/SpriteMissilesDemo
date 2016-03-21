@@ -7,6 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E69193EF1C9DE090005E878F /* .DS_Store in Resources */ = {isa = PBXBuildFile; fileRef = E69193D51C9DE090005E878F /* .DS_Store */; };
+		E69193F01C9DE090005E878F /* drone.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193D61C9DE090005E878F /* drone.caf */; };
+		E69193F11C9DE090005E878F /* explosion1.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193D71C9DE090005E878F /* explosion1.caf */; };
+		E69193F21C9DE090005E878F /* explosion2.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193D81C9DE090005E878F /* explosion2.caf */; };
+		E69193F31C9DE090005E878F /* fail0.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193D91C9DE090005E878F /* fail0.caf */; };
+		E69193F41C9DE090005E878F /* fail1.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193DA1C9DE090005E878F /* fail1.caf */; };
+		E69193F51C9DE090005E878F /* fail2.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193DB1C9DE090005E878F /* fail2.caf */; };
+		E69193F61C9DE090005E878F /* fail3.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193DC1C9DE090005E878F /* fail3.caf */; };
+		E69193F71C9DE090005E878F /* fail4.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193DD1C9DE090005E878F /* fail4.caf */; };
+		E69193F81C9DE090005E878F /* fail5.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193DE1C9DE090005E878F /* fail5.caf */; };
+		E69193F91C9DE090005E878F /* fail6.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193DF1C9DE090005E878F /* fail6.caf */; };
+		E69193FA1C9DE090005E878F /* fail7.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193E01C9DE090005E878F /* fail7.caf */; };
+		E69193FB1C9DE090005E878F /* fail8.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193E11C9DE090005E878F /* fail8.caf */; };
+		E69193FC1C9DE090005E878F /* fail9.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193E21C9DE090005E878F /* fail9.caf */; };
+		E69193FD1C9DE090005E878F /* fail10.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193E31C9DE090005E878F /* fail10.caf */; };
+		E69193FE1C9DE090005E878F /* fail11.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193E41C9DE090005E878F /* fail11.caf */; };
+		E69193FF1C9DE090005E878F /* fail12.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193E51C9DE090005E878F /* fail12.caf */; };
+		E69194001C9DE090005E878F /* fail13.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193E61C9DE090005E878F /* fail13.caf */; };
+		E69194011C9DE090005E878F /* gun1.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193E71C9DE090005E878F /* gun1.caf */; };
+		E69194021C9DE090005E878F /* levelsound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E69193E81C9DE090005E878F /* levelsound.mp3 */; };
+		E69194031C9DE090005E878F /* loud_bomb.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193E91C9DE090005E878F /* loud_bomb.caf */; };
+		E69194041C9DE090005E878F /* restoreHealth.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193EA1C9DE090005E878F /* restoreHealth.caf */; };
+		E69194051C9DE090005E878F /* ricochet.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193EB1C9DE090005E878F /* ricochet.caf */; };
+		E69194061C9DE090005E878F /* success0.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193EC1C9DE090005E878F /* success0.caf */; };
+		E69194071C9DE090005E878F /* success1.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193ED1C9DE090005E878F /* success1.caf */; };
+		E69194081C9DE090005E878F /* success2.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193EE1C9DE090005E878F /* success2.caf */; };
+		E691940A1C9DE0A5005E878F /* epicMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = E69194091C9DE0A5005E878F /* epicMusic.wav */; };
 		E6EB33731C9726E00079CEA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EB33721C9726E00079CEA7 /* AppDelegate.swift */; };
 		E6EB33751C9726E00079CEA7 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E6EB33741C9726E00079CEA7 /* GameScene.sks */; };
 		E6EB33771C9726E00079CEA7 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EB33761C9726E00079CEA7 /* GameScene.swift */; };
@@ -16,6 +43,16 @@
 		E6EB33811C9726E00079CEA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6EB337F1C9726E00079CEA7 /* LaunchScreen.storyboard */; };
 		E6EB338C1C9726E00079CEA7 /* MissileCommandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EB338B1C9726E00079CEA7 /* MissileCommandTests.swift */; };
 		E6EB33971C9726E00079CEA7 /* MissileCommandUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EB33961C9726E00079CEA7 /* MissileCommandUITests.swift */; };
+		E6EB33A51C976A9C0079CEA7 /* BMgermar.TTF in Resources */ = {isa = PBXBuildFile; fileRef = E6EB33A41C976A9B0079CEA7 /* BMgermar.TTF */; };
+		E6EB33A61C976A9C0079CEA7 /* BMgermar.TTF in Resources */ = {isa = PBXBuildFile; fileRef = E6EB33A41C976A9B0079CEA7 /* BMgermar.TTF */; };
+		E6EB33A71C976A9C0079CEA7 /* BMgermar.TTF in Resources */ = {isa = PBXBuildFile; fileRef = E6EB33A41C976A9B0079CEA7 /* BMgermar.TTF */; };
+		E6EB33A91C98E98C0079CEA7 /* IntroScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E6EB33A81C98E98C0079CEA7 /* IntroScene.sks */; };
+		E6EB33AB1C98E9950079CEA7 /* IntroScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EB33AA1C98E9950079CEA7 /* IntroScene.swift */; };
+		E6EB33B31C99FB2A0079CEA7 /* Metroid_Door-Brandino480-995195341.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E6EB33B11C99FB2A0079CEA7 /* Metroid_Door-Brandino480-995195341.mp3 */; };
+		E6EB33B41C99FB2A0079CEA7 /* Strong_Punch-Mike_Koenig-574430706.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E6EB33B21C99FB2A0079CEA7 /* Strong_Punch-Mike_Koenig-574430706.mp3 */; };
+		E6EB33B61C99FE920079CEA7 /* 01 A Night Of Dizzy Spells.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E6EB33B51C99FE910079CEA7 /* 01 A Night Of Dizzy Spells.mp3 */; };
+		E6EB33B91C9B7ACC0079CEA7 /* FireParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = E6EB33B71C9B7ACC0079CEA7 /* FireParticle.sks */; };
+		E6EB33BA1C9B7ACC0079CEA7 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = E6EB33B81C9B7ACC0079CEA7 /* spark.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +73,33 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E69193D51C9DE090005E878F /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = file; path = .DS_Store; sourceTree = "<group>"; };
+		E69193D61C9DE090005E878F /* drone.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = drone.caf; sourceTree = "<group>"; };
+		E69193D71C9DE090005E878F /* explosion1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = explosion1.caf; sourceTree = "<group>"; };
+		E69193D81C9DE090005E878F /* explosion2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = explosion2.caf; sourceTree = "<group>"; };
+		E69193D91C9DE090005E878F /* fail0.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fail0.caf; sourceTree = "<group>"; };
+		E69193DA1C9DE090005E878F /* fail1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fail1.caf; sourceTree = "<group>"; };
+		E69193DB1C9DE090005E878F /* fail2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fail2.caf; sourceTree = "<group>"; };
+		E69193DC1C9DE090005E878F /* fail3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fail3.caf; sourceTree = "<group>"; };
+		E69193DD1C9DE090005E878F /* fail4.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fail4.caf; sourceTree = "<group>"; };
+		E69193DE1C9DE090005E878F /* fail5.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fail5.caf; sourceTree = "<group>"; };
+		E69193DF1C9DE090005E878F /* fail6.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fail6.caf; sourceTree = "<group>"; };
+		E69193E01C9DE090005E878F /* fail7.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fail7.caf; sourceTree = "<group>"; };
+		E69193E11C9DE090005E878F /* fail8.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fail8.caf; sourceTree = "<group>"; };
+		E69193E21C9DE090005E878F /* fail9.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fail9.caf; sourceTree = "<group>"; };
+		E69193E31C9DE090005E878F /* fail10.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fail10.caf; sourceTree = "<group>"; };
+		E69193E41C9DE090005E878F /* fail11.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fail11.caf; sourceTree = "<group>"; };
+		E69193E51C9DE090005E878F /* fail12.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fail12.caf; sourceTree = "<group>"; };
+		E69193E61C9DE090005E878F /* fail13.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fail13.caf; sourceTree = "<group>"; };
+		E69193E71C9DE090005E878F /* gun1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = gun1.caf; sourceTree = "<group>"; };
+		E69193E81C9DE090005E878F /* levelsound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = levelsound.mp3; sourceTree = "<group>"; };
+		E69193E91C9DE090005E878F /* loud_bomb.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = loud_bomb.caf; sourceTree = "<group>"; };
+		E69193EA1C9DE090005E878F /* restoreHealth.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = restoreHealth.caf; sourceTree = "<group>"; };
+		E69193EB1C9DE090005E878F /* ricochet.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ricochet.caf; sourceTree = "<group>"; };
+		E69193EC1C9DE090005E878F /* success0.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = success0.caf; sourceTree = "<group>"; };
+		E69193ED1C9DE090005E878F /* success1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = success1.caf; sourceTree = "<group>"; };
+		E69193EE1C9DE090005E878F /* success2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = success2.caf; sourceTree = "<group>"; };
+		E69194091C9DE0A5005E878F /* epicMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = epicMusic.wav; sourceTree = "<group>"; };
 		E6EB336F1C9726E00079CEA7 /* MissileCommand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MissileCommand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6EB33721C9726E00079CEA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E6EB33741C9726E00079CEA7 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -51,6 +115,14 @@
 		E6EB33921C9726E00079CEA7 /* MissileCommandUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MissileCommandUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6EB33961C9726E00079CEA7 /* MissileCommandUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissileCommandUITests.swift; sourceTree = "<group>"; };
 		E6EB33981C9726E00079CEA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6EB33A41C976A9B0079CEA7 /* BMgermar.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMgermar.TTF; sourceTree = "<group>"; };
+		E6EB33A81C98E98C0079CEA7 /* IntroScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = IntroScene.sks; sourceTree = "<group>"; };
+		E6EB33AA1C98E9950079CEA7 /* IntroScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroScene.swift; sourceTree = "<group>"; };
+		E6EB33B11C99FB2A0079CEA7 /* Metroid_Door-Brandino480-995195341.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Metroid_Door-Brandino480-995195341.mp3"; sourceTree = "<group>"; };
+		E6EB33B21C99FB2A0079CEA7 /* Strong_Punch-Mike_Koenig-574430706.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Strong_Punch-Mike_Koenig-574430706.mp3"; sourceTree = "<group>"; };
+		E6EB33B51C99FE910079CEA7 /* 01 A Night Of Dizzy Spells.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "01 A Night Of Dizzy Spells.mp3"; sourceTree = "<group>"; };
+		E6EB33B71C9B7ACC0079CEA7 /* FireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireParticle.sks; sourceTree = "<group>"; };
+		E6EB33B81C9B7ACC0079CEA7 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,14 +173,20 @@
 		E6EB33711C9726E00079CEA7 /* MissileCommand */ = {
 			isa = PBXGroup;
 			children = (
+				E6EB33B01C99FB100079CEA7 /* Sounds */,
 				E6EB33721C9726E00079CEA7 /* AppDelegate.swift */,
 				E6EB33741C9726E00079CEA7 /* GameScene.sks */,
 				E6EB33761C9726E00079CEA7 /* GameScene.swift */,
+				E6EB33B71C9B7ACC0079CEA7 /* FireParticle.sks */,
+				E6EB33B81C9B7ACC0079CEA7 /* spark.png */,
+				E6EB33A81C98E98C0079CEA7 /* IntroScene.sks */,
+				E6EB33AA1C98E9950079CEA7 /* IntroScene.swift */,
 				E6EB33781C9726E00079CEA7 /* GameViewController.swift */,
 				E6EB337A1C9726E00079CEA7 /* Main.storyboard */,
 				E6EB337D1C9726E00079CEA7 /* Assets.xcassets */,
 				E6EB337F1C9726E00079CEA7 /* LaunchScreen.storyboard */,
 				E6EB33821C9726E00079CEA7 /* Info.plist */,
+				E6EB33A41C976A9B0079CEA7 /* BMgermar.TTF */,
 			);
 			path = MissileCommand;
 			sourceTree = "<group>";
@@ -129,6 +207,43 @@
 				E6EB33981C9726E00079CEA7 /* Info.plist */,
 			);
 			path = MissileCommandUITests;
+			sourceTree = "<group>";
+		};
+		E6EB33B01C99FB100079CEA7 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				E69194091C9DE0A5005E878F /* epicMusic.wav */,
+				E6EB33B51C99FE910079CEA7 /* 01 A Night Of Dizzy Spells.mp3 */,
+				E6EB33B11C99FB2A0079CEA7 /* Metroid_Door-Brandino480-995195341.mp3 */,
+				E6EB33B21C99FB2A0079CEA7 /* Strong_Punch-Mike_Koenig-574430706.mp3 */,
+				E69193D51C9DE090005E878F /* .DS_Store */,
+				E69193D61C9DE090005E878F /* drone.caf */,
+				E69193D71C9DE090005E878F /* explosion1.caf */,
+				E69193D81C9DE090005E878F /* explosion2.caf */,
+				E69193D91C9DE090005E878F /* fail0.caf */,
+				E69193DA1C9DE090005E878F /* fail1.caf */,
+				E69193DB1C9DE090005E878F /* fail2.caf */,
+				E69193DC1C9DE090005E878F /* fail3.caf */,
+				E69193DD1C9DE090005E878F /* fail4.caf */,
+				E69193DE1C9DE090005E878F /* fail5.caf */,
+				E69193DF1C9DE090005E878F /* fail6.caf */,
+				E69193E01C9DE090005E878F /* fail7.caf */,
+				E69193E11C9DE090005E878F /* fail8.caf */,
+				E69193E21C9DE090005E878F /* fail9.caf */,
+				E69193E31C9DE090005E878F /* fail10.caf */,
+				E69193E41C9DE090005E878F /* fail11.caf */,
+				E69193E51C9DE090005E878F /* fail12.caf */,
+				E69193E61C9DE090005E878F /* fail13.caf */,
+				E69193E71C9DE090005E878F /* gun1.caf */,
+				E69193E81C9DE090005E878F /* levelsound.mp3 */,
+				E69193E91C9DE090005E878F /* loud_bomb.caf */,
+				E69193EA1C9DE090005E878F /* restoreHealth.caf */,
+				E69193EB1C9DE090005E878F /* ricochet.caf */,
+				E69193EC1C9DE090005E878F /* success0.caf */,
+				E69193ED1C9DE090005E878F /* success1.caf */,
+				E69193EE1C9DE090005E878F /* success2.caf */,
+			);
+			name = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,10 +353,44 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E69194061C9DE090005E878F /* success0.caf in Resources */,
+				E69193F01C9DE090005E878F /* drone.caf in Resources */,
+				E69194051C9DE090005E878F /* ricochet.caf in Resources */,
+				E69193F61C9DE090005E878F /* fail3.caf in Resources */,
+				E69193FE1C9DE090005E878F /* fail11.caf in Resources */,
+				E69194081C9DE090005E878F /* success2.caf in Resources */,
+				E69194011C9DE090005E878F /* gun1.caf in Resources */,
+				E69194021C9DE090005E878F /* levelsound.mp3 in Resources */,
+				E6EB33BA1C9B7ACC0079CEA7 /* spark.png in Resources */,
+				E69193FA1C9DE090005E878F /* fail7.caf in Resources */,
+				E6EB33B41C99FB2A0079CEA7 /* Strong_Punch-Mike_Koenig-574430706.mp3 in Resources */,
+				E69194041C9DE090005E878F /* restoreHealth.caf in Resources */,
+				E69193F51C9DE090005E878F /* fail2.caf in Resources */,
+				E69193F71C9DE090005E878F /* fail4.caf in Resources */,
 				E6EB33751C9726E00079CEA7 /* GameScene.sks in Resources */,
+				E69193F41C9DE090005E878F /* fail1.caf in Resources */,
+				E6EB33A51C976A9C0079CEA7 /* BMgermar.TTF in Resources */,
+				E69193FC1C9DE090005E878F /* fail9.caf in Resources */,
 				E6EB33811C9726E00079CEA7 /* LaunchScreen.storyboard in Resources */,
+				E6EB33B61C99FE920079CEA7 /* 01 A Night Of Dizzy Spells.mp3 in Resources */,
+				E69194001C9DE090005E878F /* fail13.caf in Resources */,
+				E6EB33A91C98E98C0079CEA7 /* IntroScene.sks in Resources */,
+				E6EB33B31C99FB2A0079CEA7 /* Metroid_Door-Brandino480-995195341.mp3 in Resources */,
+				E6EB33B91C9B7ACC0079CEA7 /* FireParticle.sks in Resources */,
+				E69193F11C9DE090005E878F /* explosion1.caf in Resources */,
 				E6EB337E1C9726E00079CEA7 /* Assets.xcassets in Resources */,
+				E69193EF1C9DE090005E878F /* .DS_Store in Resources */,
+				E69193F31C9DE090005E878F /* fail0.caf in Resources */,
+				E69194031C9DE090005E878F /* loud_bomb.caf in Resources */,
+				E69193FF1C9DE090005E878F /* fail12.caf in Resources */,
+				E69193F81C9DE090005E878F /* fail5.caf in Resources */,
+				E69194071C9DE090005E878F /* success1.caf in Resources */,
 				E6EB337C1C9726E00079CEA7 /* Main.storyboard in Resources */,
+				E69193FB1C9DE090005E878F /* fail8.caf in Resources */,
+				E69193FD1C9DE090005E878F /* fail10.caf in Resources */,
+				E691940A1C9DE0A5005E878F /* epicMusic.wav in Resources */,
+				E69193F21C9DE090005E878F /* explosion2.caf in Resources */,
+				E69193F91C9DE090005E878F /* fail6.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +398,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6EB33A61C976A9C0079CEA7 /* BMgermar.TTF in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +406,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6EB33A71C976A9C0079CEA7 /* BMgermar.TTF in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +418,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6EB33771C9726E00079CEA7 /* GameScene.swift in Sources */,
+				E6EB33AB1C98E9950079CEA7 /* IntroScene.swift in Sources */,
 				E6EB33791C9726E00079CEA7 /* GameViewController.swift in Sources */,
 				E6EB33731C9726E00079CEA7 /* AppDelegate.swift in Sources */,
 			);
@@ -412,8 +564,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MissileCommand/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = myApp.MissileCommand;
+				PRODUCT_BUNDLE_IDENTIFIER = myApp.MissileCommand1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -423,8 +576,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MissileCommand/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = myApp.MissileCommand;
+				PRODUCT_BUNDLE_IDENTIFIER = myApp.MissileCommand1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -497,6 +651,7 @@
 				E6EB339D1C9726E00079CEA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E6EB339E1C9726E00079CEA7 /* Build configuration list for PBXNativeTarget "MissileCommandTests" */ = {
 			isa = XCConfigurationList;
@@ -505,6 +660,7 @@
 				E6EB33A01C9726E00079CEA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E6EB33A11C9726E00079CEA7 /* Build configuration list for PBXNativeTarget "MissileCommandUITests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +669,7 @@
 				E6EB33A31C9726E00079CEA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

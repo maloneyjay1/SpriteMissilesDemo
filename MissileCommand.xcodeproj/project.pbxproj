@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E68B7EDB1CA1D81C008A59D5 /* Drone.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B7EDA1CA1D81C008A59D5 /* Drone.swift */; };
+		E68B7EDE1CA1D8C3008A59D5 /* drone.atlas in Resources */ = {isa = PBXBuildFile; fileRef = E68B7EDD1CA1D8C3008A59D5 /* drone.atlas */; };
+		E68B7EE01CA21FD9008A59D5 /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B7EDF1CA21FD9008A59D5 /* Base.swift */; };
 		E69193EF1C9DE090005E878F /* .DS_Store in Resources */ = {isa = PBXBuildFile; fileRef = E69193D51C9DE090005E878F /* .DS_Store */; };
 		E69193F01C9DE090005E878F /* drone.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193D61C9DE090005E878F /* drone.caf */; };
 		E69193F11C9DE090005E878F /* explosion1.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193D71C9DE090005E878F /* explosion1.caf */; };
@@ -34,6 +37,10 @@
 		E69194071C9DE090005E878F /* success1.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193ED1C9DE090005E878F /* success1.caf */; };
 		E69194081C9DE090005E878F /* success2.caf in Resources */ = {isa = PBXBuildFile; fileRef = E69193EE1C9DE090005E878F /* success2.caf */; };
 		E691940A1C9DE0A5005E878F /* epicMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = E69194091C9DE0A5005E878F /* epicMusic.wav */; };
+		E691940C1CA0A11C005E878F /* EnemyMissile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E691940B1CA0A11C005E878F /* EnemyMissile.swift */; };
+		E691940E1CA0C5B1005E878F /* enemyMissile.atlas in Resources */ = {isa = PBXBuildFile; fileRef = E691940D1CA0C5B1005E878F /* enemyMissile.atlas */; };
+		E6C081921CA24C0700B78E26 /* glass.png in Resources */ = {isa = PBXBuildFile; fileRef = E6C081911CA24C0700B78E26 /* glass.png */; };
+		E6C081941CA24C5F00B78E26 /* Glass.sks in Resources */ = {isa = PBXBuildFile; fileRef = E6C081931CA24C5F00B78E26 /* Glass.sks */; };
 		E6EB33731C9726E00079CEA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EB33721C9726E00079CEA7 /* AppDelegate.swift */; };
 		E6EB33751C9726E00079CEA7 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E6EB33741C9726E00079CEA7 /* GameScene.sks */; };
 		E6EB33771C9726E00079CEA7 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EB33761C9726E00079CEA7 /* GameScene.swift */; };
@@ -73,6 +80,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E68B7EDA1CA1D81C008A59D5 /* Drone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drone.swift; sourceTree = "<group>"; };
+		E68B7EDD1CA1D8C3008A59D5 /* drone.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = drone.atlas; sourceTree = "<group>"; };
+		E68B7EDF1CA21FD9008A59D5 /* Base.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
 		E69193D51C9DE090005E878F /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = file; path = .DS_Store; sourceTree = "<group>"; };
 		E69193D61C9DE090005E878F /* drone.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = drone.caf; sourceTree = "<group>"; };
 		E69193D71C9DE090005E878F /* explosion1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = explosion1.caf; sourceTree = "<group>"; };
@@ -100,6 +110,10 @@
 		E69193ED1C9DE090005E878F /* success1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = success1.caf; sourceTree = "<group>"; };
 		E69193EE1C9DE090005E878F /* success2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = success2.caf; sourceTree = "<group>"; };
 		E69194091C9DE0A5005E878F /* epicMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = epicMusic.wav; sourceTree = "<group>"; };
+		E691940B1CA0A11C005E878F /* EnemyMissile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyMissile.swift; sourceTree = "<group>"; };
+		E691940D1CA0C5B1005E878F /* enemyMissile.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = enemyMissile.atlas; sourceTree = "<group>"; };
+		E6C081911CA24C0700B78E26 /* glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glass.png; sourceTree = "<group>"; };
+		E6C081931CA24C5F00B78E26 /* Glass.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Glass.sks; sourceTree = "<group>"; };
 		E6EB336F1C9726E00079CEA7 /* MissileCommand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MissileCommand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6EB33721C9726E00079CEA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E6EB33741C9726E00079CEA7 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -177,12 +191,19 @@
 				E6EB33721C9726E00079CEA7 /* AppDelegate.swift */,
 				E6EB33741C9726E00079CEA7 /* GameScene.sks */,
 				E6EB33761C9726E00079CEA7 /* GameScene.swift */,
+				E68B7EDF1CA21FD9008A59D5 /* Base.swift */,
+				E68B7EDA1CA1D81C008A59D5 /* Drone.swift */,
+				E691940B1CA0A11C005E878F /* EnemyMissile.swift */,
 				E6EB33B71C9B7ACC0079CEA7 /* FireParticle.sks */,
 				E6EB33B81C9B7ACC0079CEA7 /* spark.png */,
+				E6C081931CA24C5F00B78E26 /* Glass.sks */,
+				E6C081911CA24C0700B78E26 /* glass.png */,
 				E6EB33A81C98E98C0079CEA7 /* IntroScene.sks */,
 				E6EB33AA1C98E9950079CEA7 /* IntroScene.swift */,
 				E6EB33781C9726E00079CEA7 /* GameViewController.swift */,
 				E6EB337A1C9726E00079CEA7 /* Main.storyboard */,
+				E68B7EDD1CA1D8C3008A59D5 /* drone.atlas */,
+				E691940D1CA0C5B1005E878F /* enemyMissile.atlas */,
 				E6EB337D1C9726E00079CEA7 /* Assets.xcassets */,
 				E6EB337F1C9726E00079CEA7 /* LaunchScreen.storyboard */,
 				E6EB33821C9726E00079CEA7 /* Info.plist */,
@@ -357,14 +378,17 @@
 				E69193F01C9DE090005E878F /* drone.caf in Resources */,
 				E69194051C9DE090005E878F /* ricochet.caf in Resources */,
 				E69193F61C9DE090005E878F /* fail3.caf in Resources */,
+				E6C081941CA24C5F00B78E26 /* Glass.sks in Resources */,
 				E69193FE1C9DE090005E878F /* fail11.caf in Resources */,
 				E69194081C9DE090005E878F /* success2.caf in Resources */,
+				E68B7EDE1CA1D8C3008A59D5 /* drone.atlas in Resources */,
 				E69194011C9DE090005E878F /* gun1.caf in Resources */,
 				E69194021C9DE090005E878F /* levelsound.mp3 in Resources */,
 				E6EB33BA1C9B7ACC0079CEA7 /* spark.png in Resources */,
 				E69193FA1C9DE090005E878F /* fail7.caf in Resources */,
 				E6EB33B41C99FB2A0079CEA7 /* Strong_Punch-Mike_Koenig-574430706.mp3 in Resources */,
 				E69194041C9DE090005E878F /* restoreHealth.caf in Resources */,
+				E6C081921CA24C0700B78E26 /* glass.png in Resources */,
 				E69193F51C9DE090005E878F /* fail2.caf in Resources */,
 				E69193F71C9DE090005E878F /* fail4.caf in Resources */,
 				E6EB33751C9726E00079CEA7 /* GameScene.sks in Resources */,
@@ -380,6 +404,7 @@
 				E69193F11C9DE090005E878F /* explosion1.caf in Resources */,
 				E6EB337E1C9726E00079CEA7 /* Assets.xcassets in Resources */,
 				E69193EF1C9DE090005E878F /* .DS_Store in Resources */,
+				E691940E1CA0C5B1005E878F /* enemyMissile.atlas in Resources */,
 				E69193F31C9DE090005E878F /* fail0.caf in Resources */,
 				E69194031C9DE090005E878F /* loud_bomb.caf in Resources */,
 				E69193FF1C9DE090005E878F /* fail12.caf in Resources */,
@@ -417,9 +442,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E68B7EDB1CA1D81C008A59D5 /* Drone.swift in Sources */,
+				E691940C1CA0A11C005E878F /* EnemyMissile.swift in Sources */,
 				E6EB33771C9726E00079CEA7 /* GameScene.swift in Sources */,
 				E6EB33AB1C98E9950079CEA7 /* IntroScene.swift in Sources */,
 				E6EB33791C9726E00079CEA7 /* GameViewController.swift in Sources */,
+				E68B7EE01CA21FD9008A59D5 /* Base.swift in Sources */,
 				E6EB33731C9726E00079CEA7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

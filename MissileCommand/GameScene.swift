@@ -49,6 +49,10 @@ class GameScene: SKScene {
     
     var gameIsActive:Bool = false
     
+    var activeBase:CGPoint = CGPointZero
+    
+    var baseArray = [CGPoint]()
+    
     
     override func didMoveToView(view: SKView) {
         
@@ -61,7 +65,7 @@ class GameScene: SKScene {
         screenWidth = (self.view?.bounds.width)!
         screenHeight = (self.view?.bounds.height)!
         
-        physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.1)
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.2)
         
         rotateRec.addTarget(self, action: "rotatedView:")
         self.view!.addGestureRecognizer(rotateRec)
@@ -73,6 +77,9 @@ class GameScene: SKScene {
         
         self.backgroundColor = SKColor.blackColor()
         self.anchorPoint = CGPointMake(0.5, 0.0)
+        
+        setupBaseArray()
+        addBases()
         
         createPlayer()
         createGround()
@@ -157,7 +164,7 @@ class GameScene: SKScene {
             target.position = CGPointMake(0.0, turret.position.y + (length / 1.25))
             target.size = smallSize
         } else {
-            target.position = CGPointMake(0.0, turret.position.y + length)
+            target.position = CGPointMake(0.0, turret.position.y + length * 1.25)
         }
         
     }
@@ -221,6 +228,36 @@ class GameScene: SKScene {
     }
     
     
+    //MARK: setupBaseArray
+    func setupBaseArray() {
+        baseArray.append(CGPointMake(screenWidth * 0.16, ground.position.y))
+        baseArray.append(CGPointMake(screenWidth * 0.33, ground.position.y))
+        baseArray.append(CGPointMake(screenWidth * 0.48, ground.position.y))
+        baseArray.append(CGPointMake(-screenWidth * 0.16, ground.position.y))
+        baseArray.append(CGPointMake(-screenWidth * 0.33, ground.position.y))
+        baseArray.append(CGPointMake(-screenWidth * 0.48, ground.position.y))
+    }
+    
+    
+    
+    //MARK: addBases
+    func addBases() {
+        
+        for item in baseArray {
+            
+            let base:Base = Base(imageNamed: "base")
+            
+            addChild(base)
+            if isPhone == true {
+                base.position = CGPointMake(item.x, item.y + (base.size.height * 1.5))
+            } else {
+                base.position = CGPointMake(item.x, item.y + (base.size.height))
+            }
+            
+        }
+    }
+    
+    
     func rotatedView(sender:UIRotationGestureRecognizer) {
         if sender.state == .Changed {
             rotation = CGFloat(-sender.rotation) + offSet
@@ -235,10 +272,16 @@ class GameScene: SKScene {
             turret.zRotation = rotation
             target.zRotation = rotation
             
-            let xDist:CGFloat = sin(rotation) * (length / 1.25)
-            let yDist:CGFloat = cos(rotation) * (length / 1.25)
+            if isPhone == true {
+                let xDist:CGFloat = sin(rotation) * (length * 1.25)
+                let yDist:CGFloat = cos(rotation) * (length / 1.25)
+                target.position = CGPointMake(turret.position.x - xDist, turret.position.y + yDist)
+            } else {
+                let xDist:CGFloat = sin(rotation) * (length * 1.25)
+                let yDist:CGFloat = cos(rotation) * (length * 1.25)
+                target.position = CGPointMake(turret.position.x - xDist, turret.position.y + yDist)
+            }
             
-            target.position = CGPointMake(turret.position.x - xDist, turret.position.y + yDist)
         }
         
         if sender.state == .Ended {
@@ -302,7 +345,7 @@ class GameScene: SKScene {
         }
         
         let bullet:SKSpriteNode = SKSpriteNode(imageNamed: "bullet")
-        bullet.physicsBody = SKPhysicsBody(circleOfRadius: bullet.size.width / 3)
+        bullet.physicsBody = SKPhysicsBody(circleOfRadius: bullet.size.width / 2)
         bullet.physicsBody!.categoryBitMask = BodyType.bullet.rawValue
         bullet.zRotation = rotation
         bullet.name = "bulletNode"
@@ -384,10 +427,13 @@ class GameScene: SKScene {
         gameIsActive = true
         
         //begin dropping missiles
+        createEnemyMissiles()
         
         //add particles to missiles
+        startDotLoop()
         
         //begin drones flying around
+        initiateDrone()
         
         //check to see if game is over
         
@@ -439,7 +485,157 @@ class GameScene: SKScene {
     //clearEnemyMissiles
     func clearEnemyMissiles() {
         
+        
     }
+    
+    
+    //Create Enemy Missiles
+    func createEnemyMissiles() {
+        let wait:SKAction = SKAction.waitForDuration(2)
+        let block:SKAction = SKAction.runBlock(launchEnemyMissile)
+        let seq:SKAction = SKAction.sequence([block, wait])
+        let repeatAction:SKAction = SKAction.repeatActionForever(seq)
+        self.runAction(repeatAction, withKey: "createEnemyMissiles")
+    }
+    
+    
+    //MARK: launch Enemy Missile
+    func launchEnemyMissile() {
+        let missile:EnemyMissile = EnemyMissile()
+        missile.createEnemyMissile("enemyMissile")
+        addChild(missile)
+        
+        let randomX = arc4random_uniform(UInt32(screenWidth))
+        missile.position = CGPointMake(CGFloat(randomX), screenHeight)
+        
+        let randomVecX = arc4random_uniform(20)
+        let vecX = CGFloat(randomVecX) / 10
+        
+        if missile.position.x < 0 {
+            missile.physicsBody?.applyImpulse(CGVectorMake(vecX, 0.0))
+        } else if missile.position.x > 0 {
+            missile.physicsBody?.applyImpulse(CGVectorMake(-vecX, 0.0))
+        }
+    }
+    
+    
+    //MARK: addDot
+    func addDot() {
+        self.enumerateChildNodesWithName("enemyMissile"){
+            node, stop in
+            let dot:SKSpriteNode = SKSpriteNode(imageNamed: "dot")
+            dot.position = node.position
+            dot.zPosition = -1
+            self.addChild(dot)
+            
+            dot.xScale = 0.3
+            dot.yScale = 0.3
+            
+            //fade,grow,color
+            let fade:SKAction = SKAction.fadeAlphaTo(0.0, duration: 2)
+            let grow:SKAction = SKAction.scaleTo(3.0, duration: 2)
+            let color:SKAction = SKAction.colorizeWithColor(SKColor.redColor(), colorBlendFactor: 1, duration: 2)
+            let group:SKAction = SKAction.group([fade, grow, color])
+            let remove:SKAction = SKAction.removeFromParent()
+            let seq:SKAction = SKAction.sequence([group, remove])
+            dot.runAction(seq)
+            
+        }
+        
+    }
+    
+    
+    //MARK: startDotLoop
+    func startDotLoop() {
+        let block:SKAction = SKAction.runBlock(addDot)
+        let wait:SKAction = SKAction.waitForDuration(1.0/60)
+        let seq:SKAction = SKAction.sequence([block, wait])
+        let repeatAction:SKAction = SKAction.repeatActionForever(seq)
+        self.runAction(repeatAction, withKey: "dotAction")
+    }
+    
+    
+    
+    //MARK: initiateDrone
+    func initiateDrone() {
+        let wait:SKAction = SKAction.waitForDuration(5)
+        let block:SKAction = SKAction.runBlock(launchDrone)
+        let seq:SKAction = SKAction.sequence([wait, block])
+        self.runAction(seq)
+    }
+    
+    
+    //MARK: launchDrone
+    func launchDrone() {
+        let theDrone:Drone = Drone()
+        let smallSize:CGSize = CGSize(width: theDrone.droneNode.size.width / 4, height: theDrone.droneNode.size.height / 4)
+        if isPhone == true {
+            theDrone.droneNode.size = smallSize
+        }
+        theDrone.createDrone()
+        addChild(theDrone)
+        
+        let droneWidth:CGFloat = theDrone.droneNode.size.width
+        theDrone.position = CGPointMake((screenWidth / 2) + droneWidth, screenHeight * 0.8)
+        
+        let move:SKAction = SKAction.moveByX(-(screenWidth)-(droneWidth * 2), y: 0.0, duration: 10)
+        let remove:SKAction = SKAction.removeFromParent()
+        let seq:SKAction = SKAction.sequence([move, remove])
+        
+        print("\(theDrone.position)")
+        theDrone.runAction(seq)
+        
+        //bombs
+        let drop = arc4random_uniform(6)
+        let bombWait:SKAction = SKAction.waitForDuration(CFTimeInterval(drop + 2))
+        let blockDrop:SKAction = SKAction.runBlock(dropBombFromDrone)
+        let bombSeq:SKAction = SKAction.sequence([bombWait, blockDrop])
+        self.runAction(bombSeq, withKey: "dropBombFromDrone")
+        
+        //launch next drone
+        let randomTime = arc4random_uniform(30)
+        let wait:SKAction = SKAction.waitForDuration(CFTimeInterval(randomTime + 10))
+        let droneBlock:SKAction = SKAction.runBlock(launchDrone)
+        let bombSeq2:SKAction = SKAction.sequence([wait, droneBlock])
+        self.runAction(bombSeq2, withKey: "droneAction")
+        
+    }
+    
+    
+    //MARK: dropBombFromDrone
+    func dropBombFromDrone() {
+        
+        var dronePosition:CGPoint = CGPointZero
+        
+        self.enumerateChildNodesWithName("drone") {
+            node, stop in
+            
+            dronePosition = node.position
+        }
+        
+        let droneBomb:SKSpriteNode = SKSpriteNode(imageNamed: "droneBomb")
+        let smallSize:CGSize = CGSize(width: droneBomb.size.width / 2, height: droneBomb.size.height / 2)
+        if isPhone == true {
+            droneBomb.size = smallSize
+        }
+        droneBomb.position = CGPointMake(dronePosition.x, dronePosition.y - 45)
+        self.addChild(droneBomb)
+        
+        droneBomb.physicsBody = SKPhysicsBody(circleOfRadius: droneBomb.size.width / 3)
+        droneBomb.physicsBody!.categoryBitMask = BodyType.base.rawValue | BodyType.bullet.rawValue
+        droneBomb.physicsBody!.contactTestBitMask = BodyType.enemyMissile.rawValue | BodyType.enemyBomb.rawValue
+        droneBomb.physicsBody!.dynamic = true
+        droneBomb.physicsBody!.affectedByGravity = false
+        droneBomb.physicsBody!.allowsRotation = false
+        
+        let scaleY:SKAction = SKAction.scaleXBy(1, y: 1.5, duration: 0.75)
+        droneBomb.runAction(scaleY)
+        
+        let move:SKAction = SKAction.moveTo(activeBase, duration: 8)
+        droneBomb.runAction(move)
+        
+    }
+    
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let fadeDown:SKAction = SKAction.fadeAlphaTo(0, duration: 0.50)

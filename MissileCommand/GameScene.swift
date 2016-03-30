@@ -20,7 +20,7 @@ enum BodyType:UInt32 {
     case enemyBomb = 64
 }
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     static let sharedInstance = GameScene()
     
@@ -53,6 +53,14 @@ class GameScene: SKScene {
     
     var baseArray = [CGPoint]()
     
+    var level:Int = 1
+    var score:Int = 0
+    var attacksLaunched:Int = 0
+    var totalAttacks:Int = 25
+    var droneHowOften:UInt32 = 30
+    var droneBombSpeed:CFTimeInterval = 5
+    var missileRate:CFTimeInterval = 2
+    
     
     override func didMoveToView(view: SKView) {
         
@@ -66,17 +74,20 @@ class GameScene: SKScene {
         screenHeight = (self.view?.bounds.height)!
         
         physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.2)
+        physicsWorld.contactDelegate = self
         
-        rotateRec.addTarget(self, action: "rotatedView:")
+        rotateRec.addTarget(self, action: #selector(GameScene.rotatedView(_:)))
         self.view!.addGestureRecognizer(rotateRec)
         
-        tapRec.addTarget(self, action: "tappedView:")
+        tapRec.addTarget(self, action: #selector(GameScene.tappedView(_:)))
         tapRec.numberOfTouchesRequired = 1
         tapRec.numberOfTapsRequired = 1
         self.view!.addGestureRecognizer(tapRec)
         
         self.backgroundColor = SKColor.blackColor()
         self.anchorPoint = CGPointMake(0.5, 0.0)
+        
+        setLevelVars()
         
         setupBaseArray()
         addBases()
@@ -127,6 +138,7 @@ class GameScene: SKScene {
         let wait:SKAction = SKAction.waitForDuration(5)
         let seqMoon:SKAction = SKAction.sequence([moonMove, wait, moonMoveBack])
         let repeatMoonAction:SKAction = SKAction.repeatActionForever(seqMoon)
+        
         
         moon.runAction(repeatMoonAction)
     }
@@ -224,6 +236,31 @@ class GameScene: SKScene {
             let runLoop:SKAction = SKAction.repeatActionForever(seq)
             
             instructLabel.runAction(runLoop)
+        }
+    }
+    
+    
+    //MARK: setLevelVars
+    func setLevelVars() {
+        
+        totalAttacks = level * 25
+        
+        if level == 1 {
+            physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.2)
+            droneBombSpeed = 4
+            
+        } else if level == 2 {
+            physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.22)
+            droneBombSpeed = 3
+            
+        } else if level == 3 {
+            physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.24)
+            droneBombSpeed = 2
+            
+        } else {
+            physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.28)
+            droneBombSpeed = 1
+            
         }
     }
     
@@ -358,8 +395,8 @@ class GameScene: SKScene {
             
             addChild(bullet)
             
-            let forceXDist:CGFloat = sin(rotation) * 100
-            let forceYDist:CGFloat = cos(rotation) * 5
+            let forceXDist:CGFloat = sin(rotation) * 150
+            let forceYDist:CGFloat = cos(rotation) * 75
             let theForce:CGVector = CGVectorMake(turret.position.x - forceXDist, turret.position.y + forceYDist)
             bullet.physicsBody!.applyForce(theForce)
             
@@ -369,8 +406,8 @@ class GameScene: SKScene {
             createFiringParticles(firingParticlesPosition, force:fireForce)
             
         } else {
-            let xDist:CGFloat = sin(rotation) * 60
-            let yDist:CGFloat = cos(rotation) * 60
+            let xDist:CGFloat = sin(rotation) * 15
+            let yDist:CGFloat = cos(rotation) * 15
             
             bullet.position = CGPointMake(turret.position.x - xDist, turret.position.y + yDist)
             
@@ -380,8 +417,8 @@ class GameScene: SKScene {
             let destroy:SKAction = SKAction.removeFromParent()
             let seq:SKAction = SKAction.sequence([destroyWait,destroy])
             
-            let forceXDist:CGFloat = sin(rotation) * 200
-            let forceYDist:CGFloat = cos(rotation) * 200
+            let forceXDist:CGFloat = sin(rotation) * 1000
+            let forceYDist:CGFloat = cos(rotation) * 750
             let theForce:CGVector = CGVectorMake(turret.position.x - forceXDist, turret.position.y + forceYDist)
             bullet.physicsBody!.applyForce(theForce)
             
@@ -436,9 +473,43 @@ class GameScene: SKScene {
         initiateDrone()
         
         //check to see if game is over
+        startGameOverTesting()
         
         //clear unseen/unneeded nodes
         clearUnseenObjects()
+    }
+    
+    
+    
+    //startGameOverTesting
+    func startGameOverTesting() {
+        let wait:SKAction = SKAction.waitForDuration(2)
+        let block:SKAction = SKAction.runBlock(gameOverTest)
+        let seq:SKAction = SKAction.sequence([wait, block])
+        let repeatAction:SKAction = SKAction.repeatActionForever(seq)
+        self.runAction(repeatAction, withKey: "gameOverTest")
+    }
+    
+    
+    //gameOverTest
+    func gameOverTest() {
+        var destroyedBases:Int = 0
+        
+        self.enumerateChildNodesWithName("base") {
+            node, stop in
+            if let someBase:Base = node as? Base {
+                if someBase.alreadyDestroyed == true {
+                    destroyedBases+=1
+                    
+                } else {
+                    self.activeBase = someBase.position
+                }
+            }
+        }
+        
+        if destroyedBases == self.baseArray.count {
+            self.gameOver()
+        }
     }
     
     
@@ -614,6 +685,7 @@ class GameScene: SKScene {
         }
         
         let droneBomb:SKSpriteNode = SKSpriteNode(imageNamed: "droneBomb")
+        droneBomb.name = "droneBomb"
         let smallSize:CGSize = CGSize(width: droneBomb.size.width / 2, height: droneBomb.size.height / 2)
         if isPhone == true {
             droneBomb.size = smallSize
@@ -622,8 +694,8 @@ class GameScene: SKScene {
         self.addChild(droneBomb)
         
         droneBomb.physicsBody = SKPhysicsBody(circleOfRadius: droneBomb.size.width / 3)
-        droneBomb.physicsBody!.categoryBitMask = BodyType.base.rawValue | BodyType.bullet.rawValue
-        droneBomb.physicsBody!.contactTestBitMask = BodyType.enemyMissile.rawValue | BodyType.enemyBomb.rawValue
+        droneBomb.physicsBody!.categoryBitMask = BodyType.enemyBomb.rawValue
+        droneBomb.physicsBody!.contactTestBitMask = BodyType.base.rawValue | BodyType.bullet.rawValue | BodyType.playerbase.rawValue | BodyType.ground.rawValue
         droneBomb.physicsBody!.dynamic = true
         droneBomb.physicsBody!.affectedByGravity = false
         droneBomb.physicsBody!.allowsRotation = false
@@ -637,6 +709,7 @@ class GameScene: SKScene {
     }
     
     
+    //MARK: ------ TouchesBegan
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let fadeDown:SKAction = SKAction.fadeAlphaTo(0, duration: 0.50)
         let removeObject:SKAction = SKAction.removeFromParent()
@@ -647,13 +720,12 @@ class GameScene: SKScene {
         }
     }
     
-    
+    //MARK: ------ Sound
     //playNodeSound
     func playNodeActionSound(sound:String) {
         let soundAction:SKAction = SKAction.playSoundFileNamed(sound, waitForCompletion: false)
         self.runAction(soundAction)
     }
-    
     
     //playBackgroundSoundWav
     func playBackgroundSoundWav(sound:String) {
@@ -667,6 +739,258 @@ class GameScene: SKScene {
             print("AudioPlayer Created")
         } catch {
             print("No Audio")
+        }
+    }
+    
+    
+    //MARK: ------ createExplosion
+    func createExplosion(atLocation:CGPoint, image:String) {
+        let explosion: SKSpriteNode = SKSpriteNode(imageNamed: image)
+        explosion.position = atLocation
+        explosion.zPosition = 5
+        explosion.xScale = 0.1
+        explosion.yScale = explosion.xScale
+        
+        let grow:SKAction = SKAction.scaleTo(1, duration: 0.5)
+        grow.timingMode = .EaseOut
+        let color:SKAction = SKAction.colorizeWithColor(SKColor.whiteColor(), colorBlendFactor: 0.5, duration: 0.5)
+        let group:SKAction = SKAction.group([grow, color])
+        
+        let fade:SKAction = SKAction.fadeAlphaTo(0, duration: 0.5)
+        fade.timingMode = .EaseIn
+        let shrink:SKAction = SKAction.scaleTo(0.8, duration: 0.5)
+        let group2:SKAction = SKAction.group([fade, shrink])
+        
+        let remove:SKAction = SKAction.removeFromParent()
+        let seq:SKAction = SKAction.sequence([group, group2, remove])
+        addChild(explosion)
+        explosion.runAction(seq)
+    }
+    
+    
+    
+    //MARK: ------ ContactListener
+    func didBeginContact(contact: SKPhysicsContact) {
+        if contact.bodyA.categoryBitMask == BodyType.enemyMissile.rawValue && contact.bodyB.categoryBitMask == BodyType.bullet.rawValue {
+            if let missile = contact.bodyA.node! as? EnemyMissile {
+                enemyMissileAndBullet(missile)
+            }
+            contact.bodyB.node?.name = "removeNode"
+            
+        } else if contact.bodyA.categoryBitMask == BodyType.bullet.rawValue && contact.bodyB.categoryBitMask == BodyType.enemyMissile.rawValue {
+            if let missile = contact.bodyB.node! as? EnemyMissile {
+                enemyMissileAndBullet(missile)
+            }
+            contact.bodyA.node?.name = "removeNode"
+            
+        } else if contact.bodyA.categoryBitMask == BodyType.bullet.rawValue && contact.bodyB.categoryBitMask == BodyType.enemyBomb.rawValue {
+            
+            let point:CGPoint = contact.bodyB.node!.position
+            createExplosion(point, image: "explosion2")
+            contact.bodyB.node?.name = "removeNode"
+            contact.bodyA.node?.name = "removeNode"
+            
+            playNodeActionSound("loud_bomb.caf")
+            
+        } else if contact.bodyA.categoryBitMask == BodyType.enemyBomb.rawValue && contact.bodyB.categoryBitMask == BodyType.bullet.rawValue {
+            
+            let point:CGPoint = contact.bodyA.node!.position
+            createExplosion(point, image: "explosion2")
+            contact.bodyB.node?.name = "removeNode"
+            contact.bodyA.node?.name = "removeNode"
+            
+            playNodeActionSound("loud_bomb.caf")
+            
+        } else if contact.bodyA.categoryBitMask == BodyType.base.rawValue && contact.bodyB.categoryBitMask == BodyType.bullet.rawValue {
+            
+            contact.bodyB.node?.name = "removeNode"
+            
+        } else if contact.bodyA.categoryBitMask == BodyType.bullet.rawValue && contact.bodyB.categoryBitMask == BodyType.bullet.rawValue {
+            
+            contact.bodyA.node?.name = "removeNode"
+            
+        } else if contact.bodyA.categoryBitMask == BodyType.enemyMissile.rawValue && contact.bodyB.categoryBitMask == BodyType.playerbase.rawValue {
+            
+            if let missile = contact.bodyA.node! as? EnemyMissile {
+                createExplosion(missile.position, image: "explosion")
+                missile.destroy()
+            }
+            playNodeActionSound("explosion2.caf")
+            
+            //subtract player health
+            
+        } else if contact.bodyA.categoryBitMask == BodyType.playerbase.rawValue && contact.bodyB.categoryBitMask == BodyType.enemyMissile.rawValue {
+            
+            if let missile = contact.bodyB.node! as? EnemyMissile {
+                createExplosion(missile.position, image: "explosion")
+                missile.destroy()
+            }
+            playNodeActionSound("explosion2.caf")
+            
+            //subtract player health
+        } else if contact.bodyA.categoryBitMask == BodyType.enemyMissile.rawValue && contact.bodyB.categoryBitMask == BodyType.ground.rawValue {
+            
+            if let missile = contact.bodyA.node! as? EnemyMissile {
+                createExplosion(missile.position, image: "explosion")
+                missile.destroy()
+            }
+            playNodeActionSound("explosion2.caf")
+            
+            
+        } else if contact.bodyA.categoryBitMask == BodyType.ground.rawValue && contact.bodyB.categoryBitMask == BodyType.enemyMissile.rawValue {
+            
+            if let missile = contact.bodyB.node! as? EnemyMissile {
+                createExplosion(missile.position, image: "explosion")
+                missile.destroy()
+            }
+            playNodeActionSound("explosion2.caf")
+            
+        } else if contact.bodyA.categoryBitMask == BodyType.enemyMissile.rawValue && contact.bodyB.categoryBitMask == BodyType.base.rawValue {
+            
+            if let missile = contact.bodyA.node! as? EnemyMissile {
+                if let base = contact.bodyB.node! as? Base {
+                    base.hit(missile.damageCount)
+                }
+                missile.destroy()
+                playNodeActionSound("explosion2.caf")
+            }
+            
+        } else if contact.bodyA.categoryBitMask == BodyType.base.rawValue && contact.bodyB.categoryBitMask == BodyType.enemyMissile.rawValue {
+            
+            if let missile = contact.bodyB.node! as? EnemyMissile {
+                if let base = contact.bodyA.node! as? Base {
+                    base.hit(missile.damageCount)
+                }
+                missile.destroy()
+                playNodeActionSound("explosion2.caf")
+            }
+            
+            
+        } else if contact.bodyA.categoryBitMask == BodyType.base.rawValue && contact.bodyB.categoryBitMask == BodyType.enemyBomb.rawValue {
+            
+            if let base = contact.bodyA.node! as? Base {
+                base.hit(base.maxDamage)
+            }
+            
+            let point:CGPoint = contact.bodyB.node!.position
+            createExplosion(point, image: "explosion2")
+            contact.bodyB.node?.name = "removeNode"
+            playNodeActionSound("explosion2.caf")
+        
+        } else if contact.bodyA.categoryBitMask == BodyType.enemyBomb.rawValue && contact.bodyB.categoryBitMask == BodyType.base.rawValue {
+            
+            if let base = contact.bodyB.node! as? Base {
+                base.hit(base.maxDamage)
+            }
+            
+            let point:CGPoint = contact.bodyA.node!.position
+            createExplosion(point, image: "explosion2")
+            contact.bodyA.node?.name = "removeNode"
+            playNodeActionSound("explosion2.caf")
+            
+        }
+        
+        
+        
+    }
+    
+    
+    //MARK: ------ enemyMissileAndBullet
+    func enemyMissileAndBullet(missile:EnemyMissile) {
+        let thePoint:CGPoint = missile.position
+        if missile.hit() == true {
+            print("\(thePoint)")
+            createExplosion(thePoint, image: "explosion")
+            playNodeActionSound("explosion1.caf")
+        } else {
+            playNodeActionSound("ricochet.caf")
+        }
+    }
+    
+    
+    //MARK: ------- Game Over
+    func gameOver() {
+        if gameIsActive == true {
+            gameIsActive = false
+        }
+        explodeMissiles()
+        stopAllActions()
+        moveDownBases()
+        
+        let wait:SKAction = SKAction.waitForDuration(4)
+        let block:SKAction = SKAction.runBlock(restartGame)
+        let seq:SKAction = SKAction.sequence([wait, block])
+        self.runAction(seq)
+    }
+    
+    
+    //MARK: ----- Restart Game
+    func restartGame() {
+        if gameIsActive == false {
+            level = 1
+            score = 0
+            attacksLaunched = 0
+            
+            setLevelVars()
+            startGame()
+            
+        }
+    }
+    
+    
+    //MARK: ---- RestoreBases
+    func moveDownBases() {
+        playNodeActionSound("restoreHealth.caf")
+        self.enumerateChildNodesWithName("base") {
+            node, stop in
+            if let someBase:Base = node as? Base {
+                let wait:SKAction = SKAction.waitForDuration(2)
+                let moveDown:SKAction = SKAction.moveByX(0.0, y: -200, duration: 3)
+                let block:SKAction = SKAction.runBlock(someBase.revive)
+                let moveUp:SKAction = SKAction.moveByX(0.0, y: 200, duration: 1)
+                let seq:SKAction = SKAction.sequence([wait, moveDown, block, moveUp])
+                someBase.runAction(seq)
+            }
+        }
+    }
+    
+    
+    //MARK: ------ Stop Actions
+    func stopAllActions() {
+
+        self.removeActionForKey("createEnemyMissiles")
+        self.removeActionForKey("dropBombFromDrone")
+        self.removeActionForKey("droneAction")
+        self.removeActionForKey("dotAction")
+        self.removeActionForKey("clearItems")
+        self.removeActionForKey("gameOverTest")
+    }
+    
+    
+    //MARK: ------- Explode Missiles
+    func explodeMissiles() {
+        playNodeActionSound("explosion1")
+        self.enumerateChildNodesWithName("enemyMissile") {
+            node, stop in
+            if let enemyMissile:EnemyMissile = node as? EnemyMissile {
+                self.createExplosion(enemyMissile.position, image: "explosion")
+                enemyMissile.destroy()
+            }
+        }
+        
+        self.enumerateChildNodesWithName("droneBomb") {
+            node, stop in
+                self.createExplosion(node.position, image: "explosion")
+                node.name = "removeNode"
+        }
+    }
+    
+    
+    //MARK: remove "removeNode" named nodes
+    override func didSimulatePhysics() {
+        self.enumerateChildNodesWithName("removeNode") {
+            node, stop in
+            node.removeFromParent()
         }
     }
 }

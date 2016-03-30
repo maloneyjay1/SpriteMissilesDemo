@@ -11,7 +11,7 @@ import SpriteKit
 
 class Base:SKSpriteNode {
     
-    var baseName = ""
+    var baseName = "base"
     var hitCount: Int = 1
     var isPhone:Bool = true
     var alreadyDestroyed:Bool = false
@@ -72,7 +72,6 @@ class Base:SKSpriteNode {
         } else if hitCount >= maxDamage && alreadyDestroyed == false {
             self.texture = SKTexture(imageNamed: baseName + "\(maxDamage)")
             alreadyDestroyed = true
-            
             addParticles(40)
         }
     }

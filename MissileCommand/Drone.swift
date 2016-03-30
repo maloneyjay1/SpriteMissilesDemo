@@ -24,20 +24,21 @@ class Drone:SKNode {
     func setupAnimation() {
         let atlas = SKTextureAtlas(named: "drone.atlas")
         
-        for var i = 0; i < 21; i++ {
+        for i in 0 ..< 20 {
             let nameString = String(format: "drone%i", i)
             array.append(nameString)
+            print(array.count)
         }
-        
-        for var n = 0; n < array.count - 1; n++ {
+    
+        for n in 0 ..< array.count {
             let texture:SKTexture = atlas.textureNamed(array[n])
             atlasTextures.insert(texture, atIndex: n)
+            print(atlasTextures.count)
         }
         
         let atlasAnimation = SKAction.animateWithTextures(atlasTextures, timePerFrame: 1.0/20, resize: true, restore: true)
         droneAnimation = SKAction.repeatActionForever(atlasAnimation)
         droneNode.runAction(droneAnimation!, withKey: "animation")
     }
-    
 }
 

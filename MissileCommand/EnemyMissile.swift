@@ -19,6 +19,10 @@ class EnemyMissile:SKNode {
     var array = [String]()
     var atlasTextures:[SKTexture] = []
     
+    var hitsToKill:Int = 1
+    var damageCount:Int = 1
+    var hitCount:Int = 0
+    
     //createEnemyMissile
     func createEnemyMissile(image:String) {
         
@@ -44,12 +48,12 @@ class EnemyMissile:SKNode {
     func setupAnimation() {
         let atlas = SKTextureAtlas(named: "enemyMissile.atlas")
         
-        for var i = 0; i < 11; i++ {
+        for i in 0 ..< 10 {
             let nameString = String(format: "enemymissile%i", i)
             array.append(nameString)
         }
 
-        for var n = 0; n < array.count - 1; n++ {
+        for n in 0 ..< array.count {
             let texture:SKTexture = atlas.textureNamed(array[n])
             atlasTextures.insert(texture, atIndex: n)
         }
@@ -65,9 +69,31 @@ class EnemyMissile:SKNode {
         fireEmitter!.zPosition = -1
         fireEmitter!.targetNode = self
         fireEmitter!.particleLifetime = 10
-//        fireEmitter!.numParticlesToEmit = 200
-        
+        fireEmitter!.numParticlesToEmit = 200
         self.addChild(fireEmitter!)
+    }
+    
+    
+    
+    //hit
+    func hit() -> Bool {
+        hitCount += 1
+        if hitCount == hitsToKill {
+            destroy()
+            return true
+        } else {
+            damageCount = 1
+            fireEmitter!.numParticlesToEmit = 10
+            missileNode.removeActionForKey("animation")
+            return false
+        }
+    }
+    
+    
+    
+    //destroy
+    func destroy() {
+        self.removeFromParent()
     }
     
 }

@@ -9,7 +9,6 @@
 import SpriteKit
 import AVFoundation
 
-
 enum BodyType:UInt32 {
     case playerbase = 1
     case base = 2
@@ -28,10 +27,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var screenWidth:CGFloat = 0
     var screenHeight:CGFloat = 0
     var instructLabel:SKLabelNode?
+    var statsLabel:SKLabelNode?
+    var bigMiddleLabel:SKLabelNode?
+    var scoreLabel:SKLabelNode?
+    var levelLabel:SKLabelNode?
     
     let playerBase:SKSpriteNode = SKSpriteNode(imageNamed: "playerBase")
     let target:SKSpriteNode = SKSpriteNode(imageNamed: "target")
-    let turret:SKSpriteNode = SKSpriteNode(imageNamed: "turret")
+    let turret:SKSpriteNode = SKSpriteNode(imageNamed: "turret2")
     var ground:SKSpriteNode = SKSpriteNode()
     
     let loopingBG:SKSpriteNode = SKSpriteNode(imageNamed: "stars")
@@ -61,6 +64,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var droneBombSpeed:CFTimeInterval = 5
     var missileRate:CFTimeInterval = 2
     
+    var health:Int = 1
+    var healthMeter:SKSpriteNode = SKSpriteNode(imageNamed: "healthMeter1")
     
     override func didMoveToView(view: SKView) {
         
@@ -95,6 +100,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createPlayer()
         createGround()
         createInstructionLabel()
+        createStatsLabel()
+        createScoreLabel()
+        createLevelLabel()
         setupBackground()
     }
     
@@ -120,6 +128,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         startLoopingBackground()
         startGame()
+        
+        bigMiddleLabel("DEFEND EARTH")
+        
     }
     
     
@@ -179,6 +190,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             target.position = CGPointMake(0.0, turret.position.y + length * 1.25)
         }
         
+        
+        addChild(healthMeter)
+        healthMeter.zPosition = 1000
+        healthMeter.position = CGPointMake(0.0, playerBase.position.y - 20)
+        
     }
     
     
@@ -220,10 +236,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addChild(instructLabel)
             
             if isPhone == true {
-                instructLabel.position = CGPointMake(0, screenHeight * 0.5)
+                instructLabel.position = CGPointMake(0, (screenHeight * 0.5) - 50)
                 instructLabel.fontSize = 30
             } else {
-                instructLabel.position = CGPointMake(0, screenHeight * 0.3)
+                instructLabel.position = CGPointMake(0, (screenHeight * 0.3) - 80)
                 instructLabel.fontSize = 40
             }
             
@@ -240,39 +256,200 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
+    
+    //MARK: --- Stats Label
+    //firstLabel
+    func createStatsLabel() {
+        statsLabel = SKLabelNode(fontNamed: "BM germar")
+        if let statsLabel = statsLabel {
+            
+            statsLabel.horizontalAlignmentMode = .Left
+            statsLabel.verticalAlignmentMode = .Center
+            statsLabel.fontColor = SKColor.whiteColor()
+            statsLabel.text = "Wave \(attacksLaunched) / \(totalAttacks)"
+            statsLabel.zPosition = 300
+            
+            addChild(statsLabel)
+            
+            if isPhone == true {
+                statsLabel.position = CGPointMake(-(screenWidth/2) * 0.9, screenHeight - 30)
+                statsLabel.fontSize = 20
+            } else {
+                statsLabel.position = CGPointMake(-(screenWidth/2) * 0.9, screenHeight - 30)
+                statsLabel.fontSize = 40
+            }
+        }
+    }
+    
+    
+    //MARK: -- levelLabel
+    func createLevelLabel() {
+        levelLabel = SKLabelNode(fontNamed: "BM germar")
+        if let levelLabel = levelLabel {
+            
+            levelLabel.horizontalAlignmentMode = .Center
+            levelLabel.verticalAlignmentMode = .Center
+            levelLabel.fontColor = SKColor.whiteColor()
+            levelLabel.text = "Level \(level)"
+            levelLabel.zPosition = 300
+            
+            addChild(levelLabel)
+            
+            if isPhone == true {
+                levelLabel.position = CGPointMake((screenWidth/2) * 0.7, screenHeight - 30)
+                levelLabel.fontSize = 20
+            } else {
+                levelLabel.position = CGPointMake((screenWidth/2) * 0.7, screenHeight - 30)
+                levelLabel.fontSize = 40
+            }
+        }
+    }
+    
+    
+    //MARK: -- bigMiddleLabel
+    //firstLabel
+    func bigMiddleLabel(text:String) {
+        bigMiddleLabel = SKLabelNode(fontNamed: "BM germar")
+        if let bigMiddleLabel = bigMiddleLabel {
+            
+            bigMiddleLabel.horizontalAlignmentMode = .Center
+            bigMiddleLabel.verticalAlignmentMode = .Center
+            bigMiddleLabel.fontColor = SKColor.whiteColor()
+            bigMiddleLabel.text = "\(text)"
+            bigMiddleLabel.zPosition = 300
+            bigMiddleLabel.fontSize = 100
+            
+            addChild(bigMiddleLabel)
+            
+            if isPhone == true {
+                bigMiddleLabel.position = CGPointMake(0, screenHeight / 2)
+                bigMiddleLabel.fontSize = 75
+            } else {
+                bigMiddleLabel.position = CGPointMake(0, screenHeight / 2)
+            }
+            
+            
+            let wait:SKAction = SKAction.waitForDuration(2.0)
+            let fadeDown:SKAction = SKAction.fadeAlphaTo(0, duration: 1.0)
+            let remove:SKAction = SKAction.removeFromParent()
+            let seq:SKAction = SKAction.sequence([wait, fadeDown, remove])
+            bigMiddleLabel.runAction(seq)
+        }
+    }
+    
+    
+    //MARK: createScoreLabel
+    func createScoreLabel() {
+        scoreLabel = SKLabelNode(fontNamed: "BM germar")
+        if let scoreLabel = scoreLabel {
+            
+            scoreLabel.horizontalAlignmentMode = .Center
+            scoreLabel.verticalAlignmentMode = .Center
+            scoreLabel.fontColor = SKColor.whiteColor()
+            scoreLabel.text = "Score: \(score)"
+            scoreLabel.zPosition = 300
+            
+            addChild(scoreLabel)
+            
+            if isPhone == true {
+                scoreLabel.position = CGPointMake(0, screenHeight - 30)
+                scoreLabel.fontSize = 20
+            } else {
+                scoreLabel.position = CGPointMake(0, screenHeight - 30)
+                scoreLabel.fontSize = 35
+            }
+        }
+    }
+    
+    
+    //MARK: --- updateStatsLabel
+    func updateStatsLabel() {
+        statsLabel!.text = "Wave \(attacksLaunched) / \(totalAttacks)"
+        if attacksLaunched ==  totalAttacks {
+            
+            bigMiddleLabel("LEVEL UP")
+            stopAllActions()
+            moveDownBases()
+            explodeMissiles()
+
+            let wait:SKAction = SKAction.waitForDuration(2)
+            let block:SKAction = SKAction.runBlock(levelUp)
+            let seq:SKAction = SKAction.sequence([wait, block])
+            self.runAction(seq)
+        }
+    }
+    
+    
+    //MARK: --- updateScore
+    func updateScore (scoreToAdd:Int) {
+        score += scoreToAdd
+        scoreLabel?.text = "Score \(score)"
+        
+    }
+    
+    
+    //MARK: --- levelUp
+    func levelUp() {
+        
+        let wait:SKAction = SKAction.waitForDuration(0)
+        let block:SKAction = SKAction.runBlock(successSounds)
+        let seq:SKAction = SKAction.sequence([wait, block])
+        self.runAction(seq)
+        
+        attacksLaunched = 0
+        level += 1
+        levelLabel?.text = "Level \(level)"
+        
+        resetHealth()
+        setLevelVars()
+        updateStatsLabel()
+        startGame()
+    }
+    
+    
+    //MARK: --- successSounds
+    func successSounds() {
+        playRandomSound("success", range: 3)
+    }
+    
+    
+    
     //MARK: setLevelVars
     func setLevelVars() {
         
-        totalAttacks = level * 25
+        totalAttacks = level * 2
         
         if level == 1 {
-            physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.2)
-            droneBombSpeed = 4
+            physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.125)
+            droneBombSpeed = 8
+            missileRate = 4
             
         } else if level == 2 {
-            physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.22)
-            droneBombSpeed = 3
+            physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.2)
+            droneBombSpeed = 6
+            missileRate = 2
             
         } else if level == 3 {
-            physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.24)
-            droneBombSpeed = 2
+            physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.25)
+            droneBombSpeed = 3
+            missileRate = 1
             
         } else {
-            physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.28)
-            droneBombSpeed = 1
-            
+            physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.3)
+            droneBombSpeed = 2
+            missileRate = 0.5
         }
     }
     
     
     //MARK: setupBaseArray
     func setupBaseArray() {
-        baseArray.append(CGPointMake(screenWidth * 0.16, ground.position.y))
-        baseArray.append(CGPointMake(screenWidth * 0.33, ground.position.y))
-        baseArray.append(CGPointMake(screenWidth * 0.48, ground.position.y))
-        baseArray.append(CGPointMake(-screenWidth * 0.16, ground.position.y))
-        baseArray.append(CGPointMake(-screenWidth * 0.33, ground.position.y))
-        baseArray.append(CGPointMake(-screenWidth * 0.48, ground.position.y))
+        baseArray.append(CGPointMake(screenWidth * 0.16, ground.position.y - 10.0))
+        baseArray.append(CGPointMake(screenWidth * 0.33, ground.position.y - 10.0))
+        baseArray.append(CGPointMake(screenWidth * 0.48, ground.position.y - 10.0))
+        baseArray.append(CGPointMake(-screenWidth * 0.16, ground.position.y - 10.0))
+        baseArray.append(CGPointMake(-screenWidth * 0.33, ground.position.y - 10.0))
+        baseArray.append(CGPointMake(-screenWidth * 0.48, ground.position.y - 10.0))
     }
     
     
@@ -298,7 +475,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func rotatedView(sender:UIRotationGestureRecognizer) {
         if sender.state == .Changed {
             rotation = CGFloat(-sender.rotation) + offSet
-            let maxRotation = CGFloat(1.4)
+            let maxRotation = CGFloat(1)
             
             if rotation < -maxRotation {
                 rotation = -maxRotation
@@ -353,6 +530,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
+    //MARK: ------ createBullet
     func createBullet() {
         
         self.enumerateChildNodesWithName("bulletNode") {
@@ -477,6 +655,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //clear unseen/unneeded nodes
         clearUnseenObjects()
+        
+        updateStatsLabel()
+        
     }
     
     
@@ -535,14 +716,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             nodeArray.append(node)
             
             if node.position.x < -(self.screenWidth/2) {
-                node.removeFromParent()
-                print("node at \(node.position) removed")
+                node.name = "removeNode"
             } else if node.position.x > self.screenWidth/2 {
-                node.removeFromParent()
-                print("node at \(node.position) removed")
+                node.name = "removeNode"
             } else if node.position.y > self.screenHeight {
-                node.removeFromParent()
-                print("node at \(node.position) removed")
+                node.name = "removeNode"
             }
         }
         
@@ -555,14 +733,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //clearEnemyMissiles
     func clearEnemyMissiles() {
-        
+        self.enumerateChildNodesWithName("enemyMissile") {
+            node, stop in
+            var nodeArray = [node]
+            nodeArray.append(node)
+            
+            if node.position.x < -(self.screenWidth/2) {
+                node.name = "removeNode"
+            } else if node.position.x > self.screenWidth/2 {
+                node.name = "removeNode"
+            }
+        }
         
     }
     
     
     //Create Enemy Missiles
     func createEnemyMissiles() {
-        let wait:SKAction = SKAction.waitForDuration(2)
+        let wait:SKAction = SKAction.waitForDuration(missileRate)
         let block:SKAction = SKAction.runBlock(launchEnemyMissile)
         let seq:SKAction = SKAction.sequence([block, wait])
         let repeatAction:SKAction = SKAction.repeatActionForever(seq)
@@ -629,7 +817,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //MARK: initiateDrone
     func initiateDrone() {
-        let wait:SKAction = SKAction.waitForDuration(5)
+        let wait:SKAction = SKAction.waitForDuration(6)
         let block:SKAction = SKAction.runBlock(launchDrone)
         let seq:SKAction = SKAction.sequence([wait, block])
         self.runAction(seq)
@@ -657,24 +845,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         theDrone.runAction(seq)
         
         //bombs
-        let drop = arc4random_uniform(6)
+        let drop = arc4random_uniform(5)
         let bombWait:SKAction = SKAction.waitForDuration(CFTimeInterval(drop + 2))
         let blockDrop:SKAction = SKAction.runBlock(dropBombFromDrone)
         let bombSeq:SKAction = SKAction.sequence([bombWait, blockDrop])
         self.runAction(bombSeq, withKey: "dropBombFromDrone")
         
         //launch next drone
-        let randomTime = arc4random_uniform(30)
-        let wait:SKAction = SKAction.waitForDuration(CFTimeInterval(randomTime + 10))
+        let randomTime = arc4random_uniform(20)
+        let wait:SKAction = SKAction.waitForDuration(CFTimeInterval(randomTime + 6))
         let droneBlock:SKAction = SKAction.runBlock(launchDrone)
         let bombSeq2:SKAction = SKAction.sequence([wait, droneBlock])
         self.runAction(bombSeq2, withKey: "droneAction")
         
     }
     
-    
     //MARK: dropBombFromDrone
     func dropBombFromDrone() {
+        
+        attacksLaunched += 1
+        updateStatsLabel()
         
         var dronePosition:CGPoint = CGPointZero
         
@@ -703,7 +893,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let scaleY:SKAction = SKAction.scaleXBy(1, y: 1.5, duration: 0.75)
         droneBomb.runAction(scaleY)
         
-        let move:SKAction = SKAction.moveTo(activeBase, duration: 8)
+        let move:SKAction = SKAction.moveTo(activeBase, duration: droneBombSpeed)
         droneBomb.runAction(move)
         
     }
@@ -727,12 +917,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.runAction(soundAction)
     }
     
+    
+    //MARK: --- playRandomSound
+    func playRandomSound(baseName:String, range:UInt32) {
+        let randomNum = arc4random_uniform(range)
+        
+        playNodeActionSound("\(baseName)\(randomNum).caf")
+    }
+    
     //playBackgroundSoundWav
     func playBackgroundSoundWav(sound:String) {
         let fileURL:NSURL = NSBundle.mainBundle().URLForResource(sound, withExtension: "wav")!
         do {
             try bgSoundPlayer = AVAudioPlayer(contentsOfURL: fileURL)
-            bgSoundPlayer.volume = 0.25
+            bgSoundPlayer.volume = 0.75
             bgSoundPlayer.numberOfLoops = -1
             bgSoundPlayer.prepareToPlay()
             bgSoundPlayer.play()
@@ -792,6 +990,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             playNodeActionSound("loud_bomb.caf")
             
+            updateScore(15)
+            
         } else if contact.bodyA.categoryBitMask == BodyType.enemyBomb.rawValue && contact.bodyB.categoryBitMask == BodyType.bullet.rawValue {
             
             let point:CGPoint = contact.bodyA.node!.position
@@ -800,6 +1000,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             contact.bodyA.node?.name = "removeNode"
             
             playNodeActionSound("loud_bomb.caf")
+            
+            updateScore(15)
             
         } else if contact.bodyA.categoryBitMask == BodyType.base.rawValue && contact.bodyB.categoryBitMask == BodyType.bullet.rawValue {
             
@@ -817,7 +1019,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             playNodeActionSound("explosion2.caf")
             
-            //subtract player health
+            subtractHealth()
             
         } else if contact.bodyA.categoryBitMask == BodyType.playerbase.rawValue && contact.bodyB.categoryBitMask == BodyType.enemyMissile.rawValue {
             
@@ -827,7 +1029,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             playNodeActionSound("explosion2.caf")
             
-            //subtract player health
+            subtractHealth()
         } else if contact.bodyA.categoryBitMask == BodyType.enemyMissile.rawValue && contact.bodyB.categoryBitMask == BodyType.ground.rawValue {
             
             if let missile = contact.bodyA.node! as? EnemyMissile {
@@ -876,7 +1078,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             createExplosion(point, image: "explosion2")
             contact.bodyB.node?.name = "removeNode"
             playNodeActionSound("explosion2.caf")
-        
+            
         } else if contact.bodyA.categoryBitMask == BodyType.enemyBomb.rawValue && contact.bodyB.categoryBitMask == BodyType.base.rawValue {
             
             if let base = contact.bodyB.node! as? Base {
@@ -902,9 +1104,41 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             print("\(thePoint)")
             createExplosion(thePoint, image: "explosion")
             playNodeActionSound("explosion1.caf")
+            updateScore(5)
         } else {
             playNodeActionSound("ricochet.caf")
+            updateScore(1)
         }
+    }
+    
+    
+    //MARK: --- subtractHealth
+    func subtractHealth() {
+        health = health + 1
+        healthMeter.texture = SKTexture(imageNamed: "healthMeter\(health)")
+        
+        if health == 6 {
+            gameOver()
+        }
+    }
+    
+    
+    //MARK: --- resetHealth
+    func resetHealth() {
+        health = 1
+        healthMeter.texture = SKTexture(imageNamed: "healthMeter\(health)")
+    }
+    
+    
+    //MARK: -- resetWaves
+    func resetWaves() {
+        
+    }
+    
+    
+    //MARK: ---- failSounds
+    func failSounds () {
+        playRandomSound("fail", range: 14)
     }
     
     
@@ -913,14 +1147,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if gameIsActive == true {
             gameIsActive = false
         }
+        
+        let wait:SKAction = SKAction.waitForDuration(1.75)
+        let block:SKAction = SKAction.runBlock(failSounds)
+        let seq:SKAction = SKAction.sequence([wait, block])
+        self.runAction(seq)
+        
         explodeMissiles()
         stopAllActions()
         moveDownBases()
+        bigMiddleLabel("GAME OVER!")
         
-        let wait:SKAction = SKAction.waitForDuration(4)
-        let block:SKAction = SKAction.runBlock(restartGame)
-        let seq:SKAction = SKAction.sequence([wait, block])
-        self.runAction(seq)
+        
+        let wait2:SKAction = SKAction.waitForDuration(4)
+        let block2:SKAction = SKAction.runBlock(restartGame)
+        let seq2:SKAction = SKAction.sequence([wait2, block2])
+        self.runAction(seq2)
     }
     
     
@@ -931,6 +1173,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             score = 0
             attacksLaunched = 0
             
+            levelLabel?.text = "Level \(level)"
+            scoreLabel?.text = "Score \(score)"
+            
+            resetHealth()
             setLevelVars()
             startGame()
             
@@ -957,7 +1203,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //MARK: ------ Stop Actions
     func stopAllActions() {
-
+        
         self.removeActionForKey("createEnemyMissiles")
         self.removeActionForKey("dropBombFromDrone")
         self.removeActionForKey("droneAction")
@@ -980,8 +1226,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.enumerateChildNodesWithName("droneBomb") {
             node, stop in
-                self.createExplosion(node.position, image: "explosion")
-                node.name = "removeNode"
+            self.createExplosion(node.position, image: "explosion")
+            node.name = "removeNode"
         }
     }
     

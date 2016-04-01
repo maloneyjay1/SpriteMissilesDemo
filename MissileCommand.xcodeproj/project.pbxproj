@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E66663661CADB390008845CF /* trump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = E66663651CADB390008845CF /* trump.atlas */; };
 		E68B7EDB1CA1D81C008A59D5 /* Drone.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B7EDA1CA1D81C008A59D5 /* Drone.swift */; };
 		E68B7EDE1CA1D8C3008A59D5 /* drone.atlas in Resources */ = {isa = PBXBuildFile; fileRef = E68B7EDD1CA1D8C3008A59D5 /* drone.atlas */; };
 		E68B7EE01CA21FD9008A59D5 /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B7EDF1CA21FD9008A59D5 /* Base.swift */; };
@@ -80,6 +81,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E66663651CADB390008845CF /* trump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = trump.atlas; sourceTree = "<group>"; };
 		E68B7EDA1CA1D81C008A59D5 /* Drone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drone.swift; sourceTree = "<group>"; };
 		E68B7EDD1CA1D8C3008A59D5 /* drone.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = drone.atlas; sourceTree = "<group>"; };
 		E68B7EDF1CA21FD9008A59D5 /* Base.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				E6EB33AA1C98E9950079CEA7 /* IntroScene.swift */,
 				E6EB33781C9726E00079CEA7 /* GameViewController.swift */,
 				E6EB337A1C9726E00079CEA7 /* Main.storyboard */,
+				E66663651CADB390008845CF /* trump.atlas */,
 				E68B7EDD1CA1D8C3008A59D5 /* drone.atlas */,
 				E691940D1CA0C5B1005E878F /* enemyMissile.atlas */,
 				E6EB337D1C9726E00079CEA7 /* Assets.xcassets */,
@@ -375,6 +378,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E69194061C9DE090005E878F /* success0.caf in Resources */,
+				E66663661CADB390008845CF /* trump.atlas in Resources */,
 				E69193F01C9DE090005E878F /* drone.caf in Resources */,
 				E69194051C9DE090005E878F /* ricochet.caf in Resources */,
 				E69193F61C9DE090005E878F /* fail3.caf in Resources */,

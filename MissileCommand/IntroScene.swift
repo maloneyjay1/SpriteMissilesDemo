@@ -34,9 +34,9 @@ class IntroScene: SKScene {
         self.backgroundColor = SKColor.blackColor()
         self.anchorPoint = CGPointMake(0.5, 0.0)
         
-        let introScreenTexture:SKTexture = SKTexture(imageNamed: "intro_screen")
-        let introTextSize:CGSize = CGSizeMake(screenWidth, screenHeight)
-        introScreenImage = SKSpriteNode(texture: introScreenTexture, color: UIColor.clearColor(), size: introTextSize)
+//        let introScreenTexture:SKTexture = SKTexture(imageNamed: "intro_screen")
+//        let introTextSize:CGSize = CGSizeMake(screenWidth, screenHeight)
+//        introScreenImage = SKSpriteNode(texture: introScreenTexture, color: UIColor.clearColor(), size: introTextSize)
         if let introScreenImage = introScreenImage {
             introScreenImage.position = CGPointMake(0, screenHeight / 2)
             addChild(introScreenImage)

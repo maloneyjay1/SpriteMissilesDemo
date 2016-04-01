@@ -12,7 +12,7 @@ class Drone:SKNode {
     //createEnemyMissile
     func createDrone() {
         
-        droneNode = SKSpriteNode(imageNamed: "drone1")
+        droneNode = SKSpriteNode(imageNamed: "trump1")
         
         self.addChild(droneNode)
         self.name = "drone"
@@ -22,10 +22,10 @@ class Drone:SKNode {
     
     
     func setupAnimation() {
-        let atlas = SKTextureAtlas(named: "drone.atlas")
+        let atlas = SKTextureAtlas(named: "trump.atlas")
         
         for i in 0 ..< 20 {
-            let nameString = String(format: "drone%i", i)
+            let nameString = String(format: "trump%i", i)
             array.append(nameString)
             print(array.count)
         }
@@ -36,7 +36,7 @@ class Drone:SKNode {
             print(atlasTextures.count)
         }
         
-        let atlasAnimation = SKAction.animateWithTextures(atlasTextures, timePerFrame: 1.0/20, resize: true, restore: true)
+        let atlasAnimation = SKAction.animateWithTextures(atlasTextures, timePerFrame: 1.0/15, resize: true, restore: true)
         droneAnimation = SKAction.repeatActionForever(atlasAnimation)
         droneNode.runAction(droneAnimation!, withKey: "animation")
     }

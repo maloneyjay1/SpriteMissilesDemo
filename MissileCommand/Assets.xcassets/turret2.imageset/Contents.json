@@ -6,7 +6,7 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "turret@2x.png",
+      "filename" : "turret2@2x.png",
       "scale" : "2x"
     },
     {
@@ -19,7 +19,7 @@
     },
     {
       "idiom" : "iphone",
-      "filename" : "turret@1x.png",
+      "filename" : "turret2@1x.png",
       "scale" : "2x"
     },
     {

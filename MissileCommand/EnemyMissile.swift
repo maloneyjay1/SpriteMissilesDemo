@@ -68,8 +68,8 @@ class EnemyMissile:SKNode {
         fireEmitter!.name = "fireEmitter"
         fireEmitter!.zPosition = -1
         fireEmitter!.targetNode = self
-        fireEmitter!.particleLifetime = 10
-        fireEmitter!.numParticlesToEmit = 200
+        fireEmitter!.particleLifetime = 20
+        fireEmitter!.numParticlesToEmit = 50
         self.addChild(fireEmitter!)
     }
     
